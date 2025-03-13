@@ -1,18 +1,12 @@
-extends Node3D
+extends RigidBody3D
 
 
-var growing_number: float
-
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	var number: int = 250
-	number += 5
-	print(number)
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	if Input.is_action_just_pressed("ui_accept"):
-		print("spacebar pressed")
-		growing_number += 5.3
-		print(growing_number)
+	if Input.is_action_pressed("ui_accept"):
+		apply_central_force(basis.y * delta * 1000)
+		
+	if Input.is_action_pressed("ui_left"):
+		apply_torque(Vector3(0.0, 0.0, 1.0) * delta * 100)
+		
+	if Input.is_action_pressed("ui_right"):
+		apply_torque(Vector3(0.0, 0.0, -1.0) * delta * 100)
