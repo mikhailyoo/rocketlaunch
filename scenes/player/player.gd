@@ -16,9 +16,9 @@ func _process(delta: float) -> void:
 		apply_torque(Vector3(0.0, 0.0, -1.0) * delta * rotation_power)
 
 
-func victory():
+func victory(next_level):
 	print("Victory")
-	get_tree().quit()
+	get_tree().change_scene_to_file(next_level)
 	
 
 func crushed():
@@ -28,7 +28,7 @@ func crushed():
 
 func _on_body_entered(body: Node) -> void:
 	if "Victory" in body.get_groups():
-		victory()
+		call_deferred("victory", body.next_level)
 		
 	if "Obstacle" in body.get_groups():
 		call_deferred("crushed")
