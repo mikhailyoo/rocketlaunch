@@ -1,6 +1,7 @@
-[gd_scene load_steps=10 format=3 uid="uid://cgvqlvbmfbdew"]
+[gd_scene load_steps=10 format=3 uid="uid://dt3v8m1uqfrwt"]
 
-[ext_resource type="PackedScene" uid="uid://cfl7gtie0qil7" path="res://scenes/player/player.tscn" id="1_ao1bm"]
+[ext_resource type="PackedScene" uid="uid://cfl7gtie0qil7" path="res://scenes/player/player.tscn" id="1_jvbyd"]
+[ext_resource type="PackedScene" uid="uid://cfja5m0l6y4uf" path="res://scenes/Obstacle/flying_cube.tscn" id="2_ci4up"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_8y3pp"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -17,9 +18,6 @@ glow_enabled = true
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8y3pp"]
 albedo_color = Color(0.56, 0.49336, 0.4424, 1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ao1bm"]
-albedo_color = Color(0.631962, 0.50906, 0.920447, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h3e3j"]
 albedo_color = Color(0.4752, 0.6792, 0.72, 1)
@@ -48,12 +46,6 @@ use_collision = true
 size = Vector3(50, 10, 6)
 material = SubResource("StandardMaterial3D_8y3pp")
 
-[node name="Obstacle" type="CSGBox3D" parent="." groups=["Obstacle"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.99618, 0)
-use_collision = true
-size = Vector3(5, 5, 4)
-material = SubResource("StandardMaterial3D_ao1bm")
-
 [node name="Start" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 0.25, 0)
 use_collision = true
@@ -66,10 +58,14 @@ use_collision = true
 size = Vector3(2, 0.5, 2)
 material = SubResource("StandardMaterial3D_nbgty")
 script = SubResource("GDScript_h3e3j")
-next_level = "uid://dt3v8m1uqfrwt"
+next_level = "uid://unb4uijdkwof"
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.989551, 0.144183, 0, -0.144183, 0.989551, 0, 6.47257, 14.3726)
 
-[node name="Player" parent="." instance=ExtResource("1_ao1bm")]
+[node name="Player" parent="." instance=ExtResource("1_jvbyd")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.0541, 1.79571, 0)
+
+[node name="FlyingCube" parent="." instance=ExtResource("2_ci4up")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.74557, 0)
+destination = Vector3(0, 5, 0)

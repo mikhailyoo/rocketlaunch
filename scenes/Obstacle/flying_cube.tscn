@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://cfja5m0l6y4uf"]
+
+[ext_resource type="Script" uid="uid://c8c06gkmbkgw8" path="res://scenes/Obstacle/flying_cube.gd" id="1_qqgd8"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qqgd8"]
+albedo_color = Color(0.817509, 0.785163, 0.358017, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_jvbyd"]
+size = Vector3(3, 3, 3)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_ci4up"]
+points = PackedVector3Array(-1.5, -1.49971, -1.49971, 1.5, 1.49978, 1.49978, 1.5, -1.49978, 1.49978, 1.5, 1.49978, -1.49978, -1.5, 1.49971, 1.49971, 1.5, -1.49978, -1.49978, -1.5, -1.49971, 1.49971, -1.5, 1.49971, -1.49971)
+
+[node name="FlyingCube" type="AnimatableBody3D" groups=["Obstacle"]]
+script = ExtResource("1_qqgd8")
+destination = Vector3(0, 10, 0)
+duration = 2.0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+material_override = SubResource("StandardMaterial3D_qqgd8")
+mesh = SubResource("BoxMesh_jvbyd")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("ConvexPolygonShape3D_ci4up")
