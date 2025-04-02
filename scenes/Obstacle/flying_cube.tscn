@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://cfja5m0l6y4uf"]
 
-[ext_resource type="Script" uid="uid://c8c06gkmbkgw8" path="res://scenes/Obstacle/flying_cube.gd" id="1_qqgd8"]
+[ext_resource type="Script" uid="uid://c8c06gkmbkgw8" path="res://scenes/obstacle/flying_cube.gd" id="1_qqgd8"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qqgd8"]
 albedo_color = Color(0.817509, 0.785163, 0.358017, 1)
