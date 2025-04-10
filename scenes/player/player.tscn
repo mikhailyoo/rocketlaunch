@@ -1,0 +1,49 @@
+[gd_scene load_steps=8 format=3 uid="uid://cfl7gtie0qil7"]
+
+[ext_resource type="Script" uid="uid://dc75yhs46v72m" path="res://scenes/player/player.gd" id="1_8afob"]
+[ext_resource type="AudioStream" uid="uid://dotwhku22uxf7" path="res://assets/sound/8bit_bomb_explosion.wav" id="2_dovo2"]
+[ext_resource type="AudioStream" uid="uid://crqiertdrh6v8" path="res://assets/sound/sfx_-_success.ogg" id="3_gmlin"]
+[ext_resource type="AudioStream" uid="uid://nb0rnkm3sb6f" path="res://assets/sound/rocket_engine.ogg" id="4_lvxji"]
+[ext_resource type="PackedScene" uid="uid://c3rd63qomxqqe" path="res://scenes/components/smoke_particles_component.tscn" id="5_p47bc"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_8afob"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_dovo2"]
+
+[node name="Player" type="RigidBody3D"]
+axis_lock_linear_z = true
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+contact_monitor = true
+max_contacts_reported = 5
+angular_damp = 3.0
+script = ExtResource("1_8afob")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CylinderShape3D_8afob")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CylinderMesh_dovo2")
+
+[node name="AudioExplosion" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_dovo2")
+
+[node name="AudioVictory" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_gmlin")
+
+[node name="EngineSound" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("4_lvxji")
+
+[node name="SmokeParticlesComponent" parent="." instance=ExtResource("5_p47bc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+emitting = false
+
+[node name="SmokeParticlesLeft" parent="." instance=ExtResource("5_p47bc")]
+transform = Transform3D(0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0, 1, -0.5, -0.7, 0)
+emitting = false
+
+[node name="SmokeParticlesRight" parent="." instance=ExtResource("5_p47bc")]
+transform = Transform3D(0.707107, -0.707107, 0, 0.707107, 0.707107, 0, 0, 0, 1, 0.5, -0.7, 0)
+emitting = false
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
