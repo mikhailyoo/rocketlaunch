@@ -6,23 +6,41 @@ extends RigidBody3D
 
 @onready var audio_victory: AudioStreamPlayer = $AudioVictory
 @onready var engine_sound: AudioStreamPlayer3D = $EngineSound
+@onready var smoke_particles_component: GPUParticles3D = $SmokeParticlesComponent
+@onready var smoke_particles_left: GPUParticles3D = $SmokeParticlesLeft
+@onready var smoke_particles_right: GPUParticles3D = $SmokeParticlesRight
 
 
 var is_blocked: bool = false
 
 func _process(delta: float) -> void:
+	var is_moving: bool = false
 	if Input.is_action_pressed("move_up"):
+		is_moving = true
 		apply_central_force(basis.y * delta * engine_power)
+		smoke_particles_component.emitting = true
+	else:
+		smoke_particles_component.emitting = false
+		
+	if Input.is_action_pressed("left"):
+		is_moving = true
+		apply_torque(Vector3(0.0, 0.0, 1.0) * delta * rotation_power)
+		smoke_particles_left.emitting = true
+	else:
+		smoke_particles_left.emitting = false
+		
+	if Input.is_action_pressed("right"):
+		is_moving = true
+		apply_torque(Vector3(0.0, 0.0, -1.0) * delta * rotation_power)
+		smoke_particles_right.emitting = true
+	else:
+		smoke_particles_right.emitting = false
+		
+	if is_moving:
 		if not engine_sound.playing:
 			engine_sound.play()
 	else:
 		engine_sound.stop()
-		
-	if Input.is_action_pressed("left"):
-		apply_torque(Vector3(0.0, 0.0, 1.0) * delta * rotation_power)
-		
-	if Input.is_action_pressed("right"):
-		apply_torque(Vector3(0.0, 0.0, -1.0) * delta * rotation_power)
 
 
 func victory(next_level):
@@ -47,6 +65,9 @@ func crushed():
 
 func _on_body_entered(body: Node) -> void:
 	if is_blocked == false:
+		smoke_particles_component.emitting = false
+		smoke_particles_right.emitting = false
+		smoke_particles_left.emitting = false
 		engine_sound.stop()
 		
 		if "Victory" in body.get_groups():
