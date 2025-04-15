@@ -9,6 +9,7 @@ extends RigidBody3D
 @onready var smoke_particles_component: GPUParticles3D = $SmokeParticlesComponent
 @onready var smoke_particles_left: GPUParticles3D = $SmokeParticlesLeft
 @onready var smoke_particles_right: GPUParticles3D = $SmokeParticlesRight
+@onready var explosion_component: GPUParticles3D = $ExplosionComponent
 
 
 var is_blocked: bool = false
@@ -57,6 +58,7 @@ func crushed():
 	is_blocked = true
 	set_process(false)
 	print("You Crashed!")
+	explosion_component.emitting = true
 	$AudioExplosion.play()
 	var tween = create_tween()
 	tween.tween_interval(2.0)
