@@ -1,6 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://unb4uijdkwof"]
 
 [ext_resource type="PackedScene" uid="uid://cfl7gtie0qil7" path="res://scenes/player/player.tscn" id="1_h3e3j"]
+[ext_resource type="PackedScene" uid="uid://dcmip4k8xbjv3" path="res://scenes/obstacle/terrain.tscn" id="1_nbgty"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_8y3pp"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -14,9 +15,6 @@ background_mode = 2
 sky = SubResource("Sky_h3e3j")
 tonemap_mode = 2
 glow_enabled = true
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8y3pp"]
-albedo_color = Color(0.56, 0.49336, 0.4424, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h3e3j"]
 albedo_color = Color(0.4752, 0.6792, 0.72, 1)
@@ -39,11 +37,8 @@ environment = SubResource("Environment_nbgty")
 transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
 shadow_enabled = true
 
-[node name="Ground" type="CSGBox3D" parent="." groups=["Obstacle"]]
+[node name="Terrain" parent="." instance=ExtResource("1_nbgty")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5, 0)
-use_collision = true
-size = Vector3(50, 10, 6)
-material = SubResource("StandardMaterial3D_8y3pp")
 
 [node name="Start" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 0.25, 0)
@@ -60,7 +55,7 @@ script = SubResource("GDScript_h3e3j")
 next_level = "uid://cgvqlvbmfbdew"
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.989551, 0.144183, 0, -0.144183, 0.989551, 0, 6.47257, 14.3726)
+transform = Transform3D(1, 0, 0, 0, 0.989551, 0.144183, 0, -0.144183, 0.989551, 0, 8.64715, 16.1257)
 
 [node name="Player" parent="." instance=ExtResource("1_h3e3j")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.0541, 1.79571, 0)
