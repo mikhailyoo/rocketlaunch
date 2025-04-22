@@ -1,21 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://dt3v8m1uqfrwt"]
+[gd_scene load_steps=7 format=3 uid="uid://dt3v8m1uqfrwt"]
 
 [ext_resource type="PackedScene" uid="uid://cfl7gtie0qil7" path="res://scenes/player/player.tscn" id="1_jvbyd"]
 [ext_resource type="PackedScene" uid="uid://cfja5m0l6y4uf" path="res://scenes/obstacle/flying_cube.tscn" id="2_ci4up"]
 [ext_resource type="PackedScene" uid="uid://dcmip4k8xbjv3" path="res://scenes/obstacle/terrain.tscn" id="3_lt2g7"]
-
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_8y3pp"]
-sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
-ground_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
-
-[sub_resource type="Sky" id="Sky_h3e3j"]
-sky_material = SubResource("ProceduralSkyMaterial_8y3pp")
-
-[sub_resource type="Environment" id="Environment_nbgty"]
-background_mode = 2
-sky = SubResource("Sky_h3e3j")
-tonemap_mode = 2
-glow_enabled = true
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h3e3j"]
 albedo_color = Color(0.4752, 0.6792, 0.72, 1)
@@ -30,13 +17,6 @@ script/source = "extends CSGBox3D
 "
 
 [node name="Level" type="Node3D"]
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_nbgty")
-
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
-shadow_enabled = true
 
 [node name="Start" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 0.25, 0)

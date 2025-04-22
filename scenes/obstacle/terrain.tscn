@@ -1,7 +1,21 @@
-[gd_scene load_steps=2 format=3 uid="uid://dcmip4k8xbjv3"]
+[gd_scene load_steps=5 format=3 uid="uid://dcmip4k8xbjv3"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8y3pp"]
 albedo_color = Color(0.56, 0.49336, 0.4424, 1)
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_227wp"]
+sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+ground_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+
+[sub_resource type="Sky" id="Sky_h3e3j"]
+sky_material = SubResource("ProceduralSkyMaterial_227wp")
+
+[sub_resource type="Environment" id="Environment_aqv87"]
+background_mode = 1
+background_color = Color(0.04, 0.0336533, 0.0288, 1)
+sky = SubResource("Sky_h3e3j")
+tonemap_mode = 2
+glow_enabled = true
 
 [node name="Terrain" type="CSGBox3D" groups=["Obstacle"]]
 use_collision = true
@@ -72,3 +86,23 @@ material = SubResource("StandardMaterial3D_8y3pp")
 transform = Transform3D(0.823097, 0.567901, 0, -0.502123, 0.72776, 0.467158, 0.2653, -0.384517, 0.884174, -8.43143, 3.98642, -15.5961)
 size = Vector3(6.70654, 19.2591, 5.16626)
 material = SubResource("StandardMaterial3D_8y3pp")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_aqv87")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.563497, 0.826118, 0, -0.826118, 0.563497, 0, 0, 15.2337)
+light_energy = 0.5
+shadow_enabled = true
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.7732, 11.4891, 0)
+omni_range = 29.569
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.52629, 11.4891, 0)
+omni_range = 29.569
+
+[node name="OmniLight3D3" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.0018, 11.4891, 0)
+omni_range = 29.569
